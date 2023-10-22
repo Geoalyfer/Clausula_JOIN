@@ -1,0 +1,76 @@
+JOIN JUNÇÂO, serve para juntar uma ou mais tabelas. utiliza-se as chaves primarias e estrangeiras.
+
+Primeiro identificar as chaves primarias e quais planilhas elas pertencem. A seguir identifique se a mesma coluna aparece na tabela principal como chave secundária.
+
+  Ex. Na planilha vendedor a chave é primaria para a coluna matricula_vendedor. E na tabela venda, a coluna matricula_vendedor é uma chave estrangeira.
+
+--------------------------------------------------------------------
+Para inciar a junção utiliza-se a palavra reservada ON.
+Chamar o nome da coluna de cada planilha.
+
+
+FROM venda JOIN vendedor ON  venda.matricula_vendedor = vendedor.matricula_vendedor
+
+  Então o SQL ainda não vai identificar de planilha é a coluna pois ambas tem o mesmo nome.
+
+  Assim, coloca-se na seleção, o nome da planilha e o nome da coluna desejada
+
+  SELECT	codigo_venda,
+		vendedor.nome_vendedor,
+A primeira coluna já pode ser executada pelo SQL.
+
+  Logo, para trazer a outra coluna, coloca-se uma boa pratica de SQL na linha do FROM que é uma letra para cada tabela referenciada: a será o alias de venda e b será o alias de vendedor. Veja a seguir a nova descrição da linha.
+
+
+FROM venda a JOIN vendedor b ON a.matricula_vendedor = b.matricula_vendedor
+  
+Após o apelido ser lido pelo SQL, será identificado cada tabela e dado requerido será executado. ara isso, deve-se inserir a letra b na linha que demanda a coluna nome_vendedor
+
+SELECT	codigo_venda,
+		b.nome_vendedor,
+		codigo_loja,
+		codigo_produto,
+		preco_custo,
+		valor_unitario,
+		quantidade,
+		dt_venda,
+		dt_entrega
+	FROM venda a JOIN vendedor b ON a.matricula_vendedor = b.matricula_vendedor
+
+  -------------------------------------------------------------------------------
+Para inserir mais uma terceira tabela, escreve-se o JOIN depois do FROM.
+  
+SELECT	codigo_venda,
+		b.nome_vendedor,
+		c.nome_loja,
+		codigo_produto,
+		preco_custo,
+		valor_unitario,
+		quantidade,
+		dt_venda,
+		dt_entrega
+	FROM venda a JOIN vendedor b ON a.matricula_vendedor = b.matricula_vendedor
+	JOIN loja c ON a.codigo_loja = c.codigo_loja
+
+-------------------------------------------------------------------------------
+Para incluir mais colunas, coloca-se mais letras como a d
+
+SELECT	codigo_venda,
+		b.nome_vendedor,
+		c.nome_loja,
+		d.descricao_produto,
+		preco_custo,
+		valor_unitario,
+		quantidade,
+		dt_venda,
+		dt_entrega
+	FROM venda a JOIN vendedor b ON a.matricula_vendedor = b.matricula_vendedor
+	JOIN loja c ON a.codigo_loja = c.codigo_loja
+	JOIN produto d ON a.codigo_produto = d.codigo_produto
+
+  O resutado destes vinculos serao 4 tabelas vinculadas a tabela principal.
+  
+
+  
+  
+  
